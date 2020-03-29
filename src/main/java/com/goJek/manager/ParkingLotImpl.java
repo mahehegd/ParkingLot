@@ -37,6 +37,7 @@ public class ParkingLotImpl implements ParkingLot {
 
             if(this.slotToCarMap.size() == MAXIMUM_SLOTS) {
                 System.out.println("Sorry, parking lot is full");
+                return;
             }
             else {
                 final Car car = new Car(regNo, color);
@@ -97,15 +98,48 @@ public class ParkingLotImpl implements ParkingLot {
     }
 
     public void getRegistrationNumberWithColor(String color) {
+        try{
+            List<String> regNo = colorToRegNoListMap.get(color);
 
+            if(regNo.size() ==0) throw new  RuntimeException();
 
+            for(int i = 0 ; i < regNo.size(); i++ ) {
+                System.out.print(regNo.get(i) );
+                if(i != regNo.size() -1) System.out.print(", ");
+            }
+            System.out.print("\n");
+        } catch (Exception e) {
+            System.out.println("No cars found with color " + color );
+        }
     }
 
     public void getSlotNumbersForColor(String color) {
+        List<Integer> slotNumbers = new ArrayList<Integer>();
+        try{
+            List<String> regNos = colorToRegNoListMap.get(color);
 
+            if(regNos.size() == 0) throw new RuntimeException();
+
+            for(String regNo : regNos) {
+                slotNumbers.add(regNoToSlotMap.get(regNo));
+            }
+            Collections.sort(slotNumbers);
+
+            for(int i = 0 ; i < slotNumbers.size(); i++ ) {
+                System.out.print(slotNumbers.get(i) );
+                if(i != slotNumbers.size() -1) System.out.print(", ");
+            }
+            System.out.print("\n");
+        } catch (Exception e){
+            System.out.println("No car of " + color + " found");
+        }
     }
 
     public void getSlotNumberForRegNo(String regNo) {
-
+        try{
+            System.out.println(regNoToSlotMap.get(regNo));
+        } catch(Exception e){
+            System.out.println("Not found");
+        }
     }
 }
