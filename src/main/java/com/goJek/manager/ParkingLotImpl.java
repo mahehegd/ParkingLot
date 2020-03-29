@@ -54,7 +54,6 @@ public class ParkingLotImpl implements ParkingLot {
                          {{ add(car.getRegNo()); }});
                 System.out.println("Allocated slot number: " + slot);
                 openSlots.remove(slot);
-                System.out.println(openSlots);
             }
         }
     }
@@ -77,7 +76,7 @@ public class ParkingLotImpl implements ParkingLot {
             regNoToSlotMap.remove(regNo);
             colorToRegNoListMap.get(color).remove(regNo);
             slotToCarMap.remove(slotNo);
-            System.out.println("Slot number " + slotNo + "is free");
+            System.out.println("Slot number " + slotNo + " is free");
             openSlots.add(slotNo);
         }
         else {
@@ -138,9 +137,12 @@ public class ParkingLotImpl implements ParkingLot {
 
     public void getSlotNumberForRegNo(String regNo) {
         try{
+            if(regNoToSlotMap.containsKey(regNo))
             System.out.println(regNoToSlotMap.get(regNo));
+            else System.out.println("Not found");
         } catch(Exception e){
-            System.out.println("Not found");
+            System.out.println("Error locating slot for Reg number");
+            e.printStackTrace();
         }
     }
 }
