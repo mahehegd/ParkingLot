@@ -17,7 +17,7 @@ public class ParkingLotImpl implements ParkingLot {
 
     public void create(int slotNo) {
         this.MAXIMUM_SLOTS = slotNo;
-        for(int i = 1 ; i < slotNo ; i++ ) {
+        for(int i = 1 ; i <= slotNo ; i++ ) {
             openSlots.add(i);
         }
         System.out.println("Created a parking lot with " + slotNo + " slots" );
@@ -42,7 +42,7 @@ public class ParkingLotImpl implements ParkingLot {
             else {
                 final Car car = new Car(regNo, color);
                 Collections.sort(openSlots);
-                int slot = openSlots.get(0);
+                Integer slot = openSlots.get(0);
 
                 slotToCarMap.put(slot, car);
                 regNoToSlotMap.put(regNo, slot);
@@ -54,6 +54,7 @@ public class ParkingLotImpl implements ParkingLot {
                          {{ add(car.getRegNo()); }});
                 System.out.println("Allocated slot number: " + slot);
                 openSlots.remove(slot);
+                System.out.println(openSlots);
             }
         }
     }
