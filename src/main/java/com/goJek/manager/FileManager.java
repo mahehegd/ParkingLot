@@ -17,7 +17,8 @@ public class FileManager extends CommandManager {
             }
 
         }catch(Exception e){
-            System.out.println("Error handling file "+ e.getStackTrace());
+            System.out.println("Error handling file ");
+            e.printStackTrace();
         }
     }
 }
